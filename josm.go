@@ -3,6 +3,8 @@ package josm
 import (
 	"encoding/xml"
 	"io"
+	"os"
+	"strings"
 	"time"
 )
 
@@ -47,7 +49,7 @@ type Node struct {
 	XMLName xml.Name `xml:"node"`
 	Lat     float64  `xml:"lat,attr"`
 	Lon     float64  `xml:"lon,attr"`
-	Tag     []Tag    `xml:"tag"`
+	Tags    []Tag    `xml:"tag"`
 }
 
 type Way struct {
@@ -71,6 +73,19 @@ type Tag struct {
 	XMLName xml.Name `xml:"tag"`
 	Key     string   `xml:"k,attr"`
 	Value   string   `xml:"v,attr"`
+}
+
+func DecodeFile(filename string) (*Root, error) {
+	file, err := os.Open(filename)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+	return Decode(file)
+}
+
+func DecodeString(data string) (*Root, error) {
+	return Decode(strings.NewReader(data))
 }
 
 func Decode(reader io.Reader) (*Root, error) {

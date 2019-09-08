@@ -1,69 +1,4 @@
-package josm
-
-import (
-	"bytes"
-	"testing"
-)
-
-func TestUnmarshalData(t *testing.T) {
-	root, err := Decode(bytes.NewReader(testData))
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	if len(root.Nodes) != 26 {
-		t.Fatal("Root has 26 nodes.")
-	}
-
-	if len(root.Ways) != 7 {
-		t.Fatal("Root has 7 ways.")
-	}
-
-	if len(root.Relations) != 5 {
-		t.Fatal("Root has 5 relations.")
-	}
-}
-
-func TestUnmarshalFile(t *testing.T) {
-	filename := "data/test.osm"
-	root, err := DecodeFile(filename)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	if len(root.Nodes) != 26 {
-		t.Fatal("Root has 26 nodes.")
-	}
-
-	if len(root.Ways) != 7 {
-		t.Fatal("Root has 7 ways.")
-	}
-
-	if len(root.Relations) != 5 {
-		t.Fatal("Root has 5 relations.")
-	}
-}
-
-func TestUnmarshalString(t *testing.T) {
-	root, err := DecodeString(string(testData))
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	if len(root.Nodes) != 26 {
-		t.Fatal("Root has 26 nodes.")
-	}
-
-	if len(root.Ways) != 7 {
-		t.Fatal("Root has 7 ways.")
-	}
-
-	if len(root.Relations) != 5 {
-		t.Fatal("Root has 5 relations.")
-	}
-}
-
-var testData = []byte(`<?xml version='1.0' encoding='UTF-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <osm version='0.6' generator='JOSM'>
   <bounds minlat='35.60348' minlon='139.7278' maxlat='35.61147' maxlon='139.74207' origin='OpenStreetMap server' />
   <node id='-102235' action='modify' visible='true' lat='35.60900471849' lon='139.73512583976' />
@@ -167,4 +102,3 @@ var testData = []byte(`<?xml version='1.0' encoding='UTF-8'?>
     <tag k='name' v='parent relation 1' />
   </relation>
 </osm>
-`)
