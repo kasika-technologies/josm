@@ -64,7 +64,6 @@ type Way struct {
 type Relation struct {
 	Element
 	Visible bool     `xml:"visible,attr"`
-	Version string   `xml:"version,attr"`
 	Members []Member `xml:"member"`
 	Tags    []Tag    `xml:"tag"`
 }
