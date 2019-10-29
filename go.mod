@@ -1,3 +1,3 @@
-module codes.musubu.co.jp/musubu/josm
+module github.com/kasika-technologies/josm
 
-go 1.12
+go 1.13
